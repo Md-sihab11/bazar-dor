@@ -1,5 +1,5 @@
-import { Category, ProductMarquee } from '@/types/navtypes';
-import React from 'react';
+import { ProductMarquee } from '@/types/navtypes';
+
 import Marquee from "react-fast-marquee";
 
 

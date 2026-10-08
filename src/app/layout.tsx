@@ -3,6 +3,7 @@ import { Anek_Bangla } from "next/font/google";
 import "./globals.css";
 import HeaderPage from "@/components/header";
 import Navlinks from "@/components/navlinks";
+import Footer from "@/components/Footer";
 
 const banglaFonts = Anek_Bangla({
   subsets: ["latin", "bengali"],
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main>
           {children}
         </main>
-        footer
+        <Footer />
       </body>
     </html>
   );
