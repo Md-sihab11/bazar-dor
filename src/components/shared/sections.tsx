@@ -7,9 +7,9 @@ const toBnNum = (num: number | string) => {
 };
 
 const SectionsPage = async () => {
-    const res = await fetch('https://api.api-store.workers.dev/api/bazardor/products')
+    const res = await fetch('https://api.abcz.workers.dev/api/bazardor/products')
     const data: ProductMarquee[] = await res.json()
-    const totalData = data.reduce((total) => total + 1, 0)
+    const totalData = data.length
     const increasedProducts = data.filter((pr) => pr.change.dir === "up");
     const sortingProducts = increasedProducts.sort((a, b) => b.change.pct - a.change.pct)
 

@@ -8,7 +8,13 @@ const toBnNum = (num: number | string) => {
 };
 
 const Pagemarquee = async () => {
-    const res = await fetch('https://api.api-store.workers.dev/api/bazardor/products')
+    const res = await fetch('https://api.abcz.workers.dev/api/bazardor/products')
+    
+    if (!res.ok) {
+        console.error(`API Error in Marquee: ${res.status} ${res.statusText}`);
+        return null;
+    }
+
     const data = await res.json()
 
     return (
