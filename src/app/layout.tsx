@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import {Noto_Sans_Bengali } from "next/font/google";
+import { Anek_Bangla } from "next/font/google";
 import "./globals.css";
+import HeaderPage from "@/components/header";
+import Navlinks from "@/components/navlinks";
 
-const banglaFonts = Noto_Sans_Bengali({
+const banglaFonts = Anek_Bangla({
   subsets: ["latin", "bengali"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -18,13 +22,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       data-theme="light"
       className={`${banglaFonts.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        navbar
+      <body className="min-h-full flex flex-col bg-[#F0F5F0]">
+        <HeaderPage />
+        <Navlinks />
+        
         <main>
-        {children}
+          {children}
         </main>
         footer
-        </body>
+      </body>
     </html>
   );
 }

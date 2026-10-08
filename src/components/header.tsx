@@ -1,18 +1,23 @@
-import Image from "next/image";
+
 
 const HeaderPage = async () => {
 
-    const res = await fetch('https://api.api-store.workers.dev/api/bazardor/categories')
-    const data = await res.json()
-    console.log(data)
+    const date = new Date().toLocaleDateString("bn-BD", {
+        dateStyle: "full",
+    });
+    
     return (
-        <div className="container mx-auto">
-            <div>
-                <Image src="/logo-icon.png"
-                    alt="Description"
-                    width={100}
-                    height={100} />
+        <div className="w-full border-b border-gray-200 bg-white ">
+            <div className="container mx-auto py-4 flex items-center gap-4">
+                <div>
+                    <p className="text-center text-2xl bg-green-700 p-3 w-15 rounded-2xl">🛒</p>
+                </div>
+                <div>
+                    <h1 className="text-3xl font-bold">বাজার দর</h1>
+                    <h2 className="font-medium">{date}</h2>
+                </div>
             </div>
+           
         </div>
     );
 };
