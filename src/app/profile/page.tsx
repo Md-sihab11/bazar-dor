@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
-import Pagemarquee from "@/components/marquee";
 
 const ProfilePage = () => {
     const { data: session, isPending } = useSession();
@@ -72,7 +71,6 @@ const ProfilePage = () => {
 
     return (
         <div>
-            <Pagemarquee />
             <div className="container mx-auto px-4 py-10 max-w-2xl">
 
                 {/* Page title */}

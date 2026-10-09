@@ -4,7 +4,6 @@ import { FiGithub } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from 'react-toastify';
 import { authClient } from '@/lib/auth-client';
-import Pagemarquee from '@/components/marquee';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useRef, useState } from 'react';
 
@@ -50,6 +49,7 @@ const LoginFormContent = () => {
       if (data) {
         toast.success("সাইন ইন সফল হয়েছে!");
         router.push("/");
+        router.refresh();
       }
 
       if (error) {
@@ -63,73 +63,70 @@ const LoginFormContent = () => {
   };
 
   return (
-    <div>
-      <Pagemarquee />
-      <div className="flex flex-col items-center justify-center bg-base-100 p-4 py-8">
-        {/* হেডার অংশ */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold">সাইন ইন</h1>
-          <p className="text-sm text-gray-500 mt-1">বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।</p>
-        </div>
+    <div className="flex flex-col items-center justify-center bg-base-100 p-4 py-10 min-h-[70vh]">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl font-bold">সাইন ইন</h1>
+        <p className="text-sm text-gray-500 mt-1">বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।</p>
+      </div>
 
-        {/* ফর্ম */}
-        <form onSubmit={handleSubmit}>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full max-w-sm sm:w-96 border p-6 shadow-sm">
-            <label className="label">ইমেইল</label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="input w-full"
-              placeholder="you@example.com"
-            />
+      <form onSubmit={handleSubmit}>
+        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full max-w-sm sm:w-96 border p-6 shadow-sm">
+          <label className="label">ইমেইল</label>
+          <input
+            type="email"
+            name="email"
+            required
+            className="input w-full"
+            placeholder="you@example.com"
+          />
 
-            <label className="label mt-2">পাসওয়ার্ড</label>
-            <input
-              type="password"
-              name="password"
-              required
-              className="input w-full"
-              placeholder="কমপক্ষে ৮ অক্ষর"
-            />
+          <label className="label mt-2">পাসওয়ার্ড</label>
+          <input
+            type="password"
+            name="password"
+            required
+            className="input w-full"
+            placeholder="কমপক্ষে ৮ অক্ষর"
+          />
 
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="btn bg-green-700 hover:bg-green-800 disabled:bg-green-400 text-white border-none w-full mt-6"
+          >
+            {isLoading
+              ? <span className="loading loading-spinner loading-sm" />
+              : "সাইন ইন"}
+          </button>
+
+          <div className="divider my-4 text-xs text-gray-400">অথবা</div>
+
+          <div className="flex gap-2 w-full">
             <button
-              type="submit"
-              disabled={isLoading}
-              className="btn bg-green-700 hover:bg-green-800 disabled:bg-green-400 text-white border-none w-full mt-6"
+              type="button"
+              onClick={() => handleSocialLogin("google")}
+              className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2"
             >
-              {isLoading ? <span className="loading loading-spinner loading-sm" /> : "সাইন ইন"}
+              <FcGoogle className="text-lg" /> Google
             </button>
+            <button
+              type="button"
+              onClick={() => handleSocialLogin("github")}
+              className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2"
+            >
+              <FiGithub className="text-lg" /> GitHub
+            </button>
+          </div>
 
-            <div className="divider my-4 text-xs text-gray-400">অথবা</div>
+          <div className="text-center mt-4 text-sm">
+            <span className="text-gray-500">অ্যাকাউন্ট নেই? </span>
+            <Link href="/sign-up" className="text-green-700 hover:underline font-medium">সাইন আপ করুন</Link>
+          </div>
+        </fieldset>
+      </form>
 
-            <div className="flex gap-2 w-full">
-              <button
-                type="button"
-                onClick={() => handleSocialLogin("google")}
-                className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2"
-              >
-                <FcGoogle className="text-lg" /> Google
-              </button>
-              <button
-                type="button"
-                onClick={() => handleSocialLogin("github")}
-                className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2"
-              >
-                <FiGithub className="text-lg" /> GitHub
-              </button>
-            </div>
-
-            <div className="text-center mt-4 text-sm">
-              <span className="text-gray-500">অ্যাকাউন্ট নেই? </span>
-              <a href="/sign-up" className="text-green-700 hover:underline font-medium">সাইন আপ করুন</a>
-            </div>
-          </fieldset>
-        </form>
-
-        <div className="mt-4 text-sm text-gray-500">
-          <Link href="/" className="hover:underline">← হোম পেজে ফিরে যান</Link>
-        </div>
+      <div className="mt-4 text-sm text-gray-500">
+        <Link href="/" className="hover:underline">← হোম পেজে ফিরে যান</Link>
       </div>
     </div>
   );
@@ -137,7 +134,11 @@ const LoginFormContent = () => {
 
 const LogInpage = () => {
   return (
-    <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center"><span className="loading loading-spinner text-success" /></div>}>
+    <Suspense fallback={
+      <div className="min-h-[50vh] flex items-center justify-center">
+        <span className="loading loading-spinner text-success" />
+      </div>
+    }>
       <LoginFormContent />
     </Suspense>
   );
