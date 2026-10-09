@@ -51,7 +51,7 @@ const DetailPage = async ({
             <h2 className="flex flex-wrap items-center gap-2">
                 <Link href="/">হোম</Link>
                 <span>&gt;</span>
-                <Link href="/categories/chal">{data.categoryNameBn}</Link>
+                <p>{data.categoryNameBn}</p>
                 <span>&gt;</span>
                 <span>{data.nameBn}</span>
             </h2>
@@ -78,7 +78,7 @@ const DetailPage = async ({
                         )}
 
                         <div>
-                            <h2 className="font-semibold">
+                            <h2 className="font-semibold text-3xl">
                                 {data.nameBn}
                             </h2>
 
@@ -137,7 +137,7 @@ const DetailPage = async ({
                 </div>
             </div>
 
-            <PriceSummery />
+            <PriceSummery data={data} />
         </div>
     );
 };
