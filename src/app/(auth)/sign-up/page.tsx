@@ -1,56 +1,154 @@
+"use client"
 import Link from 'next/link';
 import { FiGithub } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 import Pagemarquee from '@/components/marquee';
+import { useState } from 'react';
 
 const SignUpPage = () => {
+
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSocialLogin = async (provider: "google" | "github") => {
+    await authClient.signIn.social({
+      provider,
+      callbackURL: "/",
+    });
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (!name.trim()) {
+      toast.error("নাম দিন!");
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error("পাসওয়ার্ড মিলছে না!");
+      return;
+    }
+    if (password.length < 8) {
+      toast.error("পাসওয়ার্ড কমপক্ষে ৮ অক্ষর হতে হবে!");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const { data, error } = await authClient.signUp.email({
+        name,
+        email,
+        password,
+        callbackURL: "/",
+      });
+
+      if (data) {
+        toast.success("অ্যাকাউন্ট তৈরি সফল! এখন সাইন ইন করুন।");
+        router.push("/log-in");
+      }
+
+      if (error) {
+        toast.error(error.message || "সাইন আপ ব্যর্থ হয়েছে!");
+      }
+    } catch {
+      toast.error("কিছু ভুল হয়েছে! আবার চেষ্টা করুন।");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div>
       <Pagemarquee />
-      <div className="flex flex-col items-center justify-center bg-base-100 p-4">
+      <div className="flex flex-col items-center justify-center bg-base-100 p-4 py-8">
+
         {/* হেডার অংশ */}
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold">অ্যাকাউন্ট তৈরি করুন</h1>
           <p className="text-sm text-gray-500 mt-1">বিনামূল্যে সাইন আপ করে সব বিস্তারিত দাম দেখুন।</p>
         </div>
 
-        {/* ফর্ম ফিল্ডসেট */}
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-96 border p-6 shadow-sm">
-          <label className="label">নাম</label>
-          <input type="text" className="input w-full" placeholder="যেমন: রহিম উদ্দিন" />
+        {/* ফর্ম */}
+        <form onSubmit={onSubmit}>
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full max-w-sm sm:w-96 border p-6 shadow-sm">
+            <label className="label">নাম</label>
+            <input
+              type="text"
+              name="name"
+              required
+              className="input w-full"
+              placeholder="যেমন: রহিম উদ্দিন"
+            />
 
-          <label className="label mt-2">ইমেইল</label>
-          <input type="email" className="input w-full" placeholder="you@example.com" />
+            <label className="label mt-2">ইমেইল</label>
+            <input
+              type="email"
+              name="email"
+              required
+              className="input w-full"
+              placeholder="you@example.com"
+            />
 
-          <label className="label mt-2">পাসওয়ার্ড</label>
-          <input type="password" className="input w-full" placeholder="কমপক্ষে ৮ অক্ষর" />
+            <label className="label mt-2">পাসওয়ার্ড</label>
+            <input
+              type="password"
+              name="password"
+              required
+              className="input w-full"
+              placeholder="কমপক্ষে ৮ অক্ষর"
+            />
 
-          <label className="label mt-2">পাসওয়ার্ড নিশ্চিত করুন</label>
-          <input type="password" className="input w-full" placeholder="আবার লিখুন" />
+            <label className="label mt-2">পাসওয়ার্ড নিশ্চিত করুন</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              required
+              className="input w-full"
+              placeholder="আবার লিখুন"
+            />
 
-          <button className="btn bg-green-700 hover:bg-green-800 text-white border-none w-full mt-6">
-            অ্যাকাউন্ট তৈরি করুন
-          </button>
-
-          <div className="divider my-4 text-xs text-gray-400">অথবা</div>
-
-
-          <div className="flex gap-2 w-full">
-            <button className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2">
-              <FcGoogle className="text-lg" /> Google
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="btn bg-green-700 hover:bg-green-800 disabled:bg-green-400 text-white border-none w-full mt-6"
+            >
+              {isLoading ? <span className="loading loading-spinner loading-sm" /> : "অ্যাকাউন্ট তৈরি করুন"}
             </button>
-            <button className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2">
-              <FiGithub className="text-lg" /> GitHub
-            </button>
-          </div>
 
+            <div className="divider my-4 text-xs text-gray-400">অথবা</div>
 
-          <div className="text-center mt-4 text-sm">
-            <span className="text-gray-500">অ্যাকাউন্ট আছে? </span>
-            <a href="/log-in" className="text-green-700 hover:underline font-medium">সাইন ইন করুন</a>
-          </div>
-        </fieldset>
+            <div className="flex gap-2 w-full">
+              <button
+                type="button"
+                onClick={() => handleSocialLogin("google")}
+                className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2"
+              >
+                <FcGoogle className="text-lg" /> Google
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSocialLogin("github")}
+                className="btn btn-outline bg-white hover:bg-gray-50 text-black border-base-300 flex-1 flex items-center justify-center gap-2"
+              >
+                <FiGithub className="text-lg" /> GitHub
+              </button>
+            </div>
 
+            <div className="text-center mt-4 text-sm">
+              <span className="text-gray-500">অ্যাকাউন্ট আছে? </span>
+              <a href="/log-in" className="text-green-700 hover:underline font-medium">সাইন ইন করুন</a>
+            </div>
+          </fieldset>
+        </form>
 
         <div className="mt-4 text-sm text-gray-500">
           <Link href="/" className="hover:underline">← হোম পেজে ফিরে যান</Link>
@@ -60,4 +158,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage
+export default SignUpPage;

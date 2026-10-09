@@ -3,22 +3,51 @@ import Pagemarquee from '@/components/marquee';
 import SortSelect from '@/components/SortSelect';
 import { ProductMarquee } from '@/types/navtypes';
 import Image from 'next/image'
-
+import Link from 'next/link';
 
 
 const CategoryPage = async ({ params }: { params: Promise<{ categoryId: string }> }) => {
     const { categoryId } = await params;
 
     const res = await fetch(
-        `https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`
+        `https://api.api-store.workers.dev/api/bazardor/products?category=${categoryId}`,
+
+        { next: { revalidate: 300 } }
     );
+
+    if (!res.ok) {
+        return (
+            <section className="min-h-[60vh] flex flex-col items-center justify-center gap-4 p-8 text-center">
+                <p className="text-6xl">🛒</p>
+                <h2 className="text-2xl font-bold text-gray-800">ক্যাটাগরি খুঁজে পাওয়া যায়নি</h2>
+                <p className="text-gray-500">এই ক্যাটাগরির কোনো পণ্য নেই বা URL টি ভুল।</p>
+                <Link href="/" className="btn bg-green-700 hover:bg-green-800 text-white border-none rounded-full px-8">
+                    হোম পেজে ফিরে যান
+                </Link>
+            </section>
+        );
+    }
+
     const data: ProductMarquee[] = await res.json();
     const filterItem = data.length;
 
+    // Empty state
+    if (!data || data.length === 0) {
+        return (
+            <section className="min-h-[60vh] flex flex-col items-center justify-center gap-4 p-8 text-center">
+                <p className="text-6xl">📦</p>
+                <h2 className="text-2xl font-bold text-gray-800">এই ক্যাটাগরিতে কোনো পণ্য নেই</h2>
+                <p className="text-gray-500">অন্য একটি ক্যাটাগরি দেখুন বা হোম পেজে ফিরে যান।</p>
+                <Link href="/" className="btn bg-green-700 hover:bg-green-800 text-white border-none rounded-full px-8">
+                    হোম পেজে ফিরে যান
+                </Link>
+            </section>
+        );
+    }
 
     return (
         <section className="">
-          <Pagemarquee />
+            <Pagemarquee />
 
             {/* Category Header */}
             <div className="mt-5 mb-5 bg-[#FAFCFA] container mx-auto flex gap-3 p-5 rounded-2xl border border-gray-200">
@@ -57,7 +86,7 @@ const CategoryPage = async ({ params }: { params: Promise<{ categoryId: string }
             {/* Sort */}
 
             <SortSelect data={data} />
-            
+
         </section>
     );
 };

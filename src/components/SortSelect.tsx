@@ -20,6 +20,11 @@ const SortSelect = ({
     const handleSort = (value: string) => {
         setSort(value);
 
+        if (value === "default") {
+            setSortedData(data);
+            return;
+        }
+
         const sorted = [...data].sort((a, b) => {
             if (value === "low") {
                 return Number(a.today) - Number(b.today);
@@ -78,7 +83,7 @@ const SortSelect = ({
 
                     return (
                         <Link
-                        href={`/detailpage/${pr.id}`}
+                            href={`/detailpage/${pr.id}`}
                             key={pr.id}
                             className="card w-full max-w-[30rem] bg-base-100 card-sm shadow-sm hover:shadow-md transition-shadow duration-200"
                         >

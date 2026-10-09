@@ -2,7 +2,9 @@ import Pagemarquee from "@/components/marquee";
 import PriceSummery from "@/components/shared/PriceSummery";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 const toBnNum = (num: number | string) => {
     return new Intl.NumberFormat("bn-BD").format(Number(num));
@@ -15,18 +17,68 @@ const DetailPage = async ({
 }) => {
     const { id } = await params;
 
-    const res = await fetch(
-        `https://api.abcz.workers.dev/api/bazardor/products/${id}`,
-        {
-            cache: "no-store",
-        }
-    );
-
-    if (!res.ok) {
-        notFound();
+    // Protected route — login required
+    const session = await auth.api.getSession({ headers: await headers() });
+    if (!session) {
+        redirect("/log-in?redirect=protected");
     }
 
-    const data = await res.json();
+
+    let data = null;
+    let apiError = false;
+
+    try {
+        const res = await fetch(
+            `https://api.api-store.workers.dev/api/bazardor/products/${id}`,
+
+            {
+                cache: "no-store",
+            }
+        );
+
+        if (res.ok) {
+            data = await res.json();
+        } else if (res.status === 404) {
+            notFound();
+        } else {
+            // 429 বা অন্য error — 404 না দেখিয়ে friendly error দেখাবো
+            apiError = true;
+        }
+    } catch {
+        apiError = true;
+    }
+
+    if (apiError || !data) {
+        return (
+            <div>
+                <Pagemarquee />
+                <div className="container mx-auto mt-5 mb-5 p-5 flex flex-col items-center justify-center min-h-[50vh] gap-5">
+                    <p className="text-6xl">⏳</p>
+                    <h2 className="text-2xl font-bold text-gray-800">
+                        সার্ভার এখন ব্যস্ত
+                    </h2>
+                    <p className="text-gray-500 text-center">
+                        API সার্ভার অনেক বেশি request পাচ্ছে। একটু পরে আবার চেষ্টা করুন।
+                    </p>
+                    <div className="flex gap-3">
+                        <Link
+                            href={`/detailpage/${id}`}
+                            className="btn bg-green-700 hover:bg-green-800 text-white border-none rounded-full px-8"
+                        >
+                            আবার চেষ্টা করুন
+                        </Link>
+                        <Link
+                            href="/"
+                            className="btn btn-outline rounded-full px-8"
+                        >
+                            হোমে ফিরে যান
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
 
     const priceChange = Number(data.today) - Number(data.yesterday);
 

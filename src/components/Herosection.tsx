@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Herosection = () => {
-    const [date] = useState(() =>
-        new Date().toLocaleDateString("bn-BD", {
-            dateStyle: "full",
-        })
-    );
+    const [date, setDate] = useState("");
+
+    useEffect(() => {
+        setDate(new Date().toLocaleDateString("bn-BD", { dateStyle: "full" }));
+    }, []);
 
     return (
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-5">
@@ -42,8 +42,7 @@ const Herosection = () => {
                         </p>
 
                         <a
-                            href="#allProducts"
-
+                            href="#সব-পণ্য"
                             className=" cursor-pointer mt-6 inline-flex items-center gap-2 rounded-lg bg-green-700 px-5 py-3 text-sm sm:text-base font-semibold text-white shadow-md shadow-green-700/20 transition-all duration-300 hover:bg-green-800 hover:-translate-y-0.5 hover:shadow-lg"
                         >
                             সব পণ্য দেখুন

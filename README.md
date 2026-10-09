@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 বাজার দর (Bazar Dor) — নিত্যপ্রয়োজনীয় পণ্যের বাজারদর পর্যবেক্ষণ প্ল্যাটফর্ম
 
-## Getting Started
+**বাজার দর** হলো একটি আধুনিক ওয়েব অ্যাপ্লিকেশন যা বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দৈনন্দিন বাজারদর, দামের তারতম্য, বাজারভিত্তিক তুলনামূলক বিশ্লেষণ এবং ক্যাটাগরিভিত্তিক তথ্য সহজে সাধারণ মানুষের কাছে পৌঁছে দেয়।
 
-First, run the development server:
+---
+
+## 🌟 প্রধান বৈশিষ্ট্যসমূহ (Key Features)
+
+1. **🔴 বাস্তবসম্মত লাইভ প্রাইস ট্র্যাকার (Price Ticker / Marquee):**
+   - শীর্ষ পণ্যের দৈনিক ওঠানামা (▲ বৃদ্ধি / ▼ হ্রাস) সহজে দেখতে অ্যানিমেটেড ইনফিনিট স্ক্রলিং মারকুই।
+2. **📅 স্বয়ংক্রিয় বাংলা ক্যালেন্ডার ও তারিখ:**
+   - বঙ্গাব্দ দিন, মাস ও সালসহ আধুনিক লাইভ বাংলা তারিখের প্রদর্শন।
+3. **📊 বিস্তারিত পণ্য বিশ্লেষণ (Product Details Page):**
+   - প্রতিটি পণ্যের গতদিনের সাথে দামের তুলনা, সর্বনিম্ন, সর্বোচ্চ ও গড় মূল্য এবং প্রধান প্রধান কাঁচাবাজারের তুলনামূলক মূল্যের তালিকা।
+4. **🔒 সুরক্ষিত রাউট ও উন্নত অথেন্টিকেশন (Protected Routes & Auth):**
+   - Better Auth চালিত নিরাপদ ইমেইল/পাসওয়ার্ড ও সোশ্যাল (Google & GitHub) লগইন সিস্টেম। বিস্তারিত পৃষ্ঠা দেখার জন্য সুরক্ষিত অ্যাক্সেস নিয়ন্ত্রণ।
+5. **👤 ইউজার প্রোফাইল ও অ্যাকাউন্ট ম্যানেজমেন্ট:**
+   - ব্যবহারকারীর তথ্য দেখা, প্রোফাইল নাম পরিবর্তন ও তাৎক্ষণিক সাইন-আউট কন্ট্রোল।
+6. **🏷️ ক্যাটাগরি ফিল্টারিং ও ডায়নামিক সর্টিং:**
+   - শাক-সবজি, মাছ-মাংস, চাল-ডাল ইত্যাদি ক্যাটাগরি অনুযায়ী ফিল্টার এবং দাম কম/বেশি অনুযায়ী সর্টিং সুবিধা।
+7. **📱 রেসপন্সিভ ও অ্যাক্সেসিবল ডিজাইন:**
+   - মোবাইল, ট্যাবলেট এবং ডেস্কটপ প্রতিটি ডিভাইসের জন্য অপ্টিমাইজড ইউজার ফ্রেন্ডলি গ্রিড লেআউট।
+
+---
+
+## 🛠️ ব্যবহৃত প্রযুক্তি (Technologies Used)
+
+- **ফ্রন্টএন্ড ফ্রেমওয়ার্ক:** [Next.js](https://nextjs.org/) (App Router, React 19)
+- **প্রোগ্রামিং ভাষা:** TypeScript
+- **স্টাইলিং:** Tailwind CSS & DaisyUI
+- **অথেন্টিকেশন:** [Better Auth](https://better-auth.com/) (Email/Password, OAuth)
+- **ডাটাবেস:** MongoDB (Atlas)
+- **নোটিফিকেশন:** React Toastify
+- **আইকন ও ফন্ট:** React Icons, Google Fonts (Anek Bangla)
+
+---
+
+## 🚀 লোকাল সেটআপ গাইড (Getting Started)
+
+### ১. ক্লোন ও ডিপেন্ডেন্সি ইনস্টল
+
+```bash
+git clone https://github.com/Md-sihab11/bazar-dor.git
+cd bazar-dor
+npm install
+```
+
+### ২. এনভায়রনমেন্ট ভেরিয়েবল সেটআপ (`.env`)
+
+প্রজেক্ট রুট ফোল্ডারে একটি `.env` ফাইল তৈরি করুন এবং নিচের মানগুলো যোগ করুন:
+
+```env
+MONGO_DB_URL=your_mongodb_connection_string
+BETTER_AUTH_SECRET=your_auth_secret
+BETTER_AUTH_BASE_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+```
+
+### ৩. ডেভেলপমেন্ট সার্ভার চালু করুন
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করুন।
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 ফোল্ডার স্ট্রাকচার
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── (auth)/         # লগইন ও সাইনআপ পেজ
+│   ├── api/            # Better Auth API হ্যান্ডলার
+│   ├── categories/     # ক্যাটাগরি পেজ ও লোডিং স্কেলিটন
+│   ├── detailpage/     # সুরক্ষিত প্রোডাক্ট ডিটেইল পেজ
+│   ├── profile/        # ইউজার প্রোফাইল পেজ
+│   ├── loading.tsx     # গ্লোবাল লোডিং স্পিনার
+│   ├── not-found.tsx   # কাস্টম ৪০৪ পেজ
+│   └── page.tsx        # হোম পেজ (হিরো + প্রোডাক্ট সেকশন)
+├── components/         # রিইউজেবল ইউআই কম্পোনেন্টস (Header, Footer, Marquee, ইত্যাদি)
+├── lib/                # Auth ও ডাটাবেস কনফিগারেশন
+└── types/              # টাইপস্ক্রিপ্ট টাইপ ডেফিনিশন
+```
