@@ -51,7 +51,7 @@ const DetailPage = async ({
             <h2 className="flex flex-wrap items-center gap-2">
                 <Link href="/">হোম</Link>
                 <span>&gt;</span>
-                <Link href="/chal">{data.categoryNameBn}</Link>
+                <Link href="/categories/chal">{data.categoryNameBn}</Link>
                 <span>&gt;</span>
                 <span>{data.nameBn}</span>
             </h2>
