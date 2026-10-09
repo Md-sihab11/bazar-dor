@@ -3,6 +3,7 @@
 import { ProductMarquee } from "@/types/navtypes";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const toBnNum = (num: number | string) => {
     return new Intl.NumberFormat("bn-BD").format(Number(num));
@@ -76,7 +77,8 @@ const SortSelect = ({
                     const isDown = pr.change?.dir === "down";
 
                     return (
-                        <div
+                        <Link
+                        href={`/detailpage/${pr.id}`}
                             key={pr.id}
                             className="card w-full max-w-[30rem] bg-base-100 card-sm shadow-sm hover:shadow-md transition-shadow duration-200"
                         >
@@ -111,7 +113,7 @@ const SortSelect = ({
                                     <div>
 
                                         <p className="font-semibold text-base sm:text-lg">
-                                            {pr.categoryNameBn}
+                                            {pr.nameBn}
                                         </p>
 
                                         <p className="text-sm text-gray-500 mt-1">
@@ -153,13 +155,13 @@ const SortSelect = ({
                                     <div className="font-medium text-sm sm:text-base text-right whitespace-nowrap">
 
                                         {isUp && (
-                                            <span className="text-green-600">
+                                            <span className="text-red-600">
                                                 ▲ {toBnNum(pr.change.pct)}%
                                             </span>
                                         )}
 
                                         {isDown && (
-                                            <span className="text-red-600">
+                                            <span className="text-green-600">
                                                 ▼ {toBnNum(pr.change.pct)}%
                                             </span>
                                         )}
@@ -176,7 +178,7 @@ const SortSelect = ({
 
                             </div>
 
-                        </div>
+                        </Link>
                     );
                 })}
 

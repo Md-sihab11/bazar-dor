@@ -10,6 +10,12 @@ interface PriceChange {
   dir: "up" | "down" | "same"; // ba string
   pct: number;
 }
+type Market = {
+  market: string;
+  division: string;
+  min: number;
+  max: number;
+};
 
 export interface ProductMarquee {
 
@@ -26,5 +32,5 @@ export interface ProductMarquee {
   lastWeek: number;
   lastMonth: number;
   change: PriceChange;
-
+  markets: Market[];
 }

@@ -11,19 +11,6 @@ const CategoryPage = async ({ params }: { params: Promise<{ categoryId: string }
     const res = await fetch(
         `https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`
     );
-
-    if (!res.ok) {
-        // Log the error and return an empty array or handle it appropriately
-        console.error(`API Error: ${res.status} ${res.statusText}`);
-        return (
-            <section className="mt-5 mb-5 container mx-auto">
-                <div className="bg-red-100 text-red-600 p-5 rounded-2xl">
-                    API থেকে ডাটা লোড করতে সমস্যা হয়েছে (Error: {res.status})। কিছুক্ষণ পর আবার চেষ্টা করুন।
-                </div>
-            </section>
-        );
-    }
-
     const data: ProductMarquee[] = await res.json();
     const filterItem = data.length;
 

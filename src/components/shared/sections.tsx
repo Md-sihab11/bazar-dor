@@ -59,7 +59,7 @@ const SectionsPage = async () => {
 
                                         <div>
                                             <p className="font-semibold text-base sm:text-lg">
-                                                {pr.categoryNameBn}
+                                                {pr.nameBn}
                                             </p>
 
                                             <p className="text-sm text-gray-500 mt-1">
@@ -142,7 +142,7 @@ const SectionsPage = async () => {
 
                                         <div>
                                             <p className="font-semibold text-base sm:text-lg">
-                                                {pr.categoryNameBn}
+                                                {pr.nameBn}
                                             </p>
 
                                             <p className="text-sm text-gray-500 mt-1">
@@ -232,7 +232,7 @@ const SectionsPage = async () => {
 
                                             <div>
                                                 <p className="font-semibold text-base sm:text-lg">
-                                                    {pr.categoryNameBn}
+                                                    {pr.nameBn}
                                                 </p>
 
                                                 <p className="text-sm text-gray-500 mt-1">
@@ -273,14 +273,14 @@ const SectionsPage = async () => {
                                             <div className=" font-medium text-sm sm:text-base text-right whitespace-nowrap">
 
                                                 {
-                                                    isUp && (<span className="text-center text-green-600"> ▲{toBnNum(pr.change.pct)}%</span>)
+                                                    isUp && (<span className="text-center text-red-600"> ▲{toBnNum(pr.change.pct)}%</span>)
                                                 }
                                                 {
-                                                    isDown && (<span className="text-center text-red-600"> ▼{toBnNum(pr.change.pct)}%</span>)
+                                                    isDown && (<span className="text-center text-green-600"> ▼{toBnNum(pr.change.pct)}%</span>)
                                                 }
                                                 {
                                                     !isUp && !isDown && (
-                                                        <span className="font-medium text-xs text-black-400">▬ ০.০%</span>
+                                                        <span className="font-medium text-xs text-gray-400">▬ ০.০%</span>
                                                     )
                                                 }
                                             </div>
