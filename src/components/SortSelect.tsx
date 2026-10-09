@@ -38,7 +38,7 @@ const SortSelect = ({
     return (
         <div>
 
-            <div className="bg-[#FAFCFA] container mx-auto flex justify-end items-center gap-3 p-5 rounded-2xl border border-gray-200 mt-5">
+            <div className="bg-[#FAFCFA] container mx-auto flex justify-end items-center gap-3 p-5 rounded-2xl border border-gray-200 mt-5 ">
 
                 <p className="flex items-center">
                     সাজান
@@ -69,7 +69,7 @@ const SortSelect = ({
             </p>
 
             {/* Products */}
-            <div className="container mx-auto mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="container mx-auto mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-7">
 
                 {sortedData.map((pr: ProductMarquee) => {
 

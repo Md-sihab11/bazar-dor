@@ -1,3 +1,4 @@
+import Pagemarquee from "@/components/marquee";
 import PriceSummery from "@/components/shared/PriceSummery";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,99 +48,102 @@ const DetailPage = async ({
                             : data.unit;
 
     return (
-        <div className="container mx-auto mt-5 mb-5 space-y-5 p-5">
-            <h2 className="flex flex-wrap items-center gap-2">
-                <Link href="/">হোম</Link>
-                <span>&gt;</span>
-                <p>{data.categoryNameBn}</p>
-                <span>&gt;</span>
-                <span>{data.nameBn}</span>
-            </h2>
+        <div>
+            <Pagemarquee />
+            <div className="container mx-auto mt-5 mb-5 space-y-5 p-5">
+                <h2 className="flex flex-wrap items-center gap-2">
+                    <Link href="/">হোম</Link>
+                    <span>&gt;</span>
+                    <p>{data.categoryNameBn}</p>
+                    <span>&gt;</span>
+                    <span>{data.nameBn}</span>
+                </h2>
 
-            <div className="rounded-xl bg-[#FAFCFA] p-10">
-                <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
-                    <div className="flex items-center gap-3">
-                        {data.image?.startsWith("http") ? (
-                            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-gray-100">
-                                <Image
-                                    src={data.image}
-                                    alt={data.nameBn}
-                                    width={64}
-                                    height={64}
-                                    className="h-full w-full object-contain"
-                                />
+                <div className="rounded-xl bg-[#FAFCFA] p-10">
+                    <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
+                        <div className="flex items-center gap-3">
+                            {data.image?.startsWith("http") ? (
+                                <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-gray-100">
+                                    <Image
+                                        src={data.image}
+                                        alt={data.nameBn}
+                                        width={64}
+                                        height={64}
+                                        className="h-full w-full object-contain"
+                                    />
+                                </div>
+                            ) : (
+                                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gray-100">
+                                    <span className="text-4xl">
+                                        {data.image || "🛒"}
+                                    </span>
+                                </div>
+                            )}
+
+                            <div>
+                                <h2 className="font-semibold text-3xl">
+                                    {data.nameBn}
+                                </h2>
+
+                                <p className="text-sm text-gray-500">
+                                    প্রতি {unitBn} · {data.categoryNameBn}
+                                </p>
+
+                                {priceChange > 0 ? (
+                                    <p className="mt-1 text-sm text-red-600">
+                                        গতকালের তুলনায় আজ দাম বেড়েছে ·{" "}
+                                        {toBnNum(priceChange)} টাকা
+                                    </p>
+                                ) : priceChange < 0 ? (
+                                    <p className="mt-1 text-sm text-green-600">
+                                        গতকালের তুলনায় আজ দাম কমেছে ·{" "}
+                                        {toBnNum(Math.abs(priceChange))} টাকা
+                                    </p>
+                                ) : (
+                                    <p className="mt-1 text-sm text-gray-500">
+                                        গতকালের তুলনায় আজ দাম অপরিবর্তিত
+                                    </p>
+                                )}
                             </div>
-                        ) : (
-                            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gray-100">
-                                <span className="text-4xl">
-                                    {data.image || "🛒"}
-                                </span>
-                            </div>
-                        )}
+                        </div>
 
-                        <div>
-                            <h2 className="font-semibold text-3xl">
-                                {data.nameBn}
-                            </h2>
-
+                        <div className="flex flex-col gap-2 sm:text-right">
                             <p className="text-sm text-gray-500">
-                                প্রতি {unitBn} · {data.categoryNameBn}
+                                আজকের দাম
                             </p>
 
-                            {priceChange > 0 ? (
-                                <p className="mt-1 text-sm text-red-600">
-                                    গতকালের তুলনায় আজ দাম বেড়েছে ·{" "}
-                                    {toBnNum(priceChange)} টাকা
-                                </p>
-                            ) : priceChange < 0 ? (
-                                <p className="mt-1 text-sm text-green-600">
-                                    গতকালের তুলনায় আজ দাম কমেছে ·{" "}
-                                    {toBnNum(Math.abs(priceChange))} টাকা
-                                </p>
-                            ) : (
-                                <p className="mt-1 text-sm text-gray-500">
-                                    গতকালের তুলনায় আজ দাম অপরিবর্তিত
-                                </p>
-                            )}
+                            <p className="text-center text-3xl font-bold">
+                                {toBnNum(data.today)}
+                            </p>
+
+                            <p>
+                                টাকা / {unitBn}
+                            </p>
+
+                            <p
+                                className={
+                                    data.change.dir === "up"
+                                        ? "text-red-600"
+                                        : data.change.dir === "down"
+                                            ? "text-green-600"
+                                            : "text-gray-500"
+                                }
+                            >
+                                {data.change.dir === "up"
+                                    ? "▲"
+                                    : data.change.dir === "down"
+                                        ? "▼"
+                                        : "−"}{" "}
+                                {toBnNum(Math.abs(changePct))}%
+                            </p>
                         </div>
                     </div>
-
-                    <div className="flex flex-col gap-2 sm:text-right">
-                        <p className="text-sm text-gray-500">
-                            আজকের দাম
-                        </p>
-
-                        <p className="text-center text-3xl font-bold">
-                            {toBnNum(data.today)}
-                        </p>
-
-                        <p>
-                            টাকা / {unitBn}
-                        </p>
-
-                        <p
-                            className={
-                                data.change.dir === "up"
-                                    ? "text-red-600"
-                                    : data.change.dir === "down"
-                                        ? "text-green-600"
-                                        : "text-gray-500"
-                            }
-                        >
-                            {data.change.dir === "up"
-                                ? "▲"
-                                : data.change.dir === "down"
-                                    ? "▼"
-                                    : "−"}{" "}
-                            {toBnNum(Math.abs(changePct))}%
-                        </p>
-                    </div>
                 </div>
-            </div>
 
-            <PriceSummery data={data} />
-        </div>
-    );
+                <PriceSummery data={data} />
+            </div>
+         </div>
+     );
 };
 
-export default DetailPage;
+            export default DetailPage;

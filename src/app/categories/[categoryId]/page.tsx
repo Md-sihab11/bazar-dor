@@ -1,4 +1,5 @@
 
+import Pagemarquee from '@/components/marquee';
 import SortSelect from '@/components/SortSelect';
 import { ProductMarquee } from '@/types/navtypes';
 import Image from 'next/image'
@@ -16,10 +17,11 @@ const CategoryPage = async ({ params }: { params: Promise<{ categoryId: string }
 
 
     return (
-        <section className="mt-5 mb-5">
+        <section className="">
+          <Pagemarquee />
 
             {/* Category Header */}
-            <div className="bg-[#FAFCFA] container mx-auto flex gap-3 p-5 rounded-2xl border border-gray-200">
+            <div className="mt-5 mb-5 bg-[#FAFCFA] container mx-auto flex gap-3 p-5 rounded-2xl border border-gray-200">
 
                 {data[0]?.image?.startsWith("http") ? (
                     <div className="w-16 h-16 shrink-0 bg-gray-100 rounded-xl overflow-hidden">
@@ -55,11 +57,7 @@ const CategoryPage = async ({ params }: { params: Promise<{ categoryId: string }
             {/* Sort */}
 
             <SortSelect data={data} />
-
-
-
-
-
+            
         </section>
     );
 };

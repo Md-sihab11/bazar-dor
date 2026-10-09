@@ -27,8 +27,8 @@ const HeaderPage = () => {
                 </div>
 
                 <div className="flex gap-2 items-center">
-                    <button className="cursor-pointer font-semibold p-5 border-0  bg-none">সাইন ইন</button>
-                    <button className="btn text-white bg-green-500 rounded border-0">সাইন আপ</button>
+                    <Link href="/log-in" className="cursor-pointer font-semibold p-5 border-0  bg-none">সাইন ইন</Link>
+                    <Link href="/sign-up" className="btn text-white bg-green-700 rounded border-0">সাইন আপ</Link>
                 </div>
 
             </div>
