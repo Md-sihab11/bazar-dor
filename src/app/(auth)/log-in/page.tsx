@@ -1,3 +1,11 @@
-export default function LoginPage() {
-  return <div>Log In Page</div>;
-}
+import React from 'react';
+
+const LogInpage = () => {
+  return (
+    <div>
+      
+    </div>
+  );
+};
+
+export default LogInpage;

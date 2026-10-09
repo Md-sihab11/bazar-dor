@@ -1,6 +1,7 @@
 
 import { ProductMarquee } from "@/types/navtypes";
 import Image from 'next/image'
+import Link from 'next/link'
 
 const toBnNum = (num: number | string) => {
     return new Intl.NumberFormat("bn-BD").format(Number(num));
@@ -31,7 +32,8 @@ const SectionsPage = async () => {
                     sortingProducts.slice(0, 6).map((pr: ProductMarquee) => {
 
                         return (
-                            <div
+                            <Link
+                                href={`/detailpage/${pr.id}`}
                                 key={pr.id}
                                 className="card w-full max-w-[30rem] bg-base-100 card-sm shadow-sm hover:shadow-md transition-shadow duration-200"
                             >
@@ -100,7 +102,7 @@ const SectionsPage = async () => {
                                     </div>
 
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })
                 }
@@ -114,7 +116,8 @@ const SectionsPage = async () => {
                     DsortingProducts.slice(0, 6).map((pr: ProductMarquee) => {
 
                         return (
-                            <div
+                            <Link
+                                href={`/detailpage/${pr.id}`}
                                 key={pr.id}
                                 className="card w-full max-w-[30rem] bg-base-100 card-sm shadow-sm hover:shadow-md transition-shadow duration-200"
                             >
@@ -183,7 +186,7 @@ const SectionsPage = async () => {
                                     </div>
 
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })
                 }
@@ -204,7 +207,8 @@ const SectionsPage = async () => {
                             const isDown = pr.change?.dir === "down";
 
                             return (
-                                <div
+                                <Link
+                                    href={`/detailpage/${pr.id}`}
                                     key={pr.id}
                                     className="card w-full max-w-[30rem] bg-base-100 card-sm shadow-sm hover:shadow-md transition-shadow duration-200"
                                 >
@@ -288,7 +292,7 @@ const SectionsPage = async () => {
                                         </div>
 
                                     </div>
-                                </div>
+                                </Link>
                             );
                         })
                     }

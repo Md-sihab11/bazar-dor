@@ -1,3 +1,11 @@
-export default function SignUpPage() {
-  return <div>Sign Up Page</div>;
-}
+import React from 'react';
+
+const SignUpPage = () => {
+  return (
+    <div>
+      
+    </div>
+  );
+};
+
+export default SignUpPage
