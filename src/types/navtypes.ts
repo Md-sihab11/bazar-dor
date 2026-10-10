@@ -6,11 +6,12 @@ export interface Category {
 
 }
 
-interface PriceChange {
+export interface PriceChange {
   dir: "up" | "down" | "same"; // ba string
   pct: number;
 }
-type Market = {
+
+export interface Market {
   market: string;
   division: string;
   min: number;

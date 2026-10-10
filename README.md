@@ -1,43 +1,49 @@
-# 🛒 বাজার দর (Bazar Dor) — নিত্যপ্রয়োজনীয় পণ্যের বাজারদর পর্যবেক্ষণ প্ল্যাটফর্ম
+# 🛒 Bazar Dor: Essential Commodities Price Monitoring Platform
 
-**বাজার দর** হলো একটি আধুনিক ওয়েব অ্যাপ্লিকেশন যা বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দৈনন্দিন বাজারদর, দামের তারতম্য, বাজারভিত্তিক তুলনামূলক বিশ্লেষণ এবং ক্যাটাগরিভিত্তিক তথ্য সহজে সাধারণ মানুষের কাছে পৌঁছে দেয়।
-
----
-
-## 🌟 প্রধান বৈশিষ্ট্যসমূহ (Key Features)
-
-1. **🔴 বাস্তবসম্মত লাইভ প্রাইস ট্র্যাকার (Price Ticker / Marquee):**
-   - শীর্ষ পণ্যের দৈনিক ওঠানামা (▲ বৃদ্ধি / ▼ হ্রাস) সহজে দেখতে অ্যানিমেটেড ইনফিনিট স্ক্রলিং মারকুই।
-2. **📅 স্বয়ংক্রিয় বাংলা ক্যালেন্ডার ও তারিখ:**
-   - বঙ্গাব্দ দিন, মাস ও সালসহ আধুনিক লাইভ বাংলা তারিখের প্রদর্শন।
-3. **📊 বিস্তারিত পণ্য বিশ্লেষণ (Product Details Page):**
-   - প্রতিটি পণ্যের গতদিনের সাথে দামের তুলনা, সর্বনিম্ন, সর্বোচ্চ ও গড় মূল্য এবং প্রধান প্রধান কাঁচাবাজারের তুলনামূলক মূল্যের তালিকা।
-4. **🔒 সুরক্ষিত রাউট ও উন্নত অথেন্টিকেশন (Protected Routes & Auth):**
-   - Better Auth চালিত নিরাপদ ইমেইল/পাসওয়ার্ড ও সোশ্যাল (Google & GitHub) লগইন সিস্টেম। বিস্তারিত পৃষ্ঠা দেখার জন্য সুরক্ষিত অ্যাক্সেস নিয়ন্ত্রণ।
-5. **👤 ইউজার প্রোফাইল ও অ্যাকাউন্ট ম্যানেজমেন্ট:**
-   - ব্যবহারকারীর তথ্য দেখা, প্রোফাইল নাম পরিবর্তন ও তাৎক্ষণিক সাইন-আউট কন্ট্রোল।
-6. **🏷️ ক্যাটাগরি ফিল্টারিং ও ডায়নামিক সর্টিং:**
-   - শাক-সবজি, মাছ-মাংস, চাল-ডাল ইত্যাদি ক্যাটাগরি অনুযায়ী ফিল্টার এবং দাম কম/বেশি অনুযায়ী সর্টিং সুবিধা।
-7. **📱 রেসপন্সিভ ও অ্যাক্সেসিবল ডিজাইন:**
-   - মোবাইল, ট্যাবলেট এবং ডেস্কটপ প্রতিটি ডিভাইসের জন্য অপ্টিমাইজড ইউজার ফ্রেন্ডলি গ্রিড লেআউট।
+**Bazar Dor** is a modern web application designed to make daily market prices of essential commodities in Bangladesh easily accessible to the public. It provides daily price updates, price fluctuations, market-based comparisons, and category-wise information to help users understand and compare market prices.
 
 ---
 
-## 🛠️ ব্যবহৃত প্রযুক্তি (Technologies Used)
+## 🌟 Key Features
 
-- **ফ্রন্টএন্ড ফ্রেমওয়ার্ক:** [Next.js](https://nextjs.org/) (App Router, React 19)
-- **প্রোগ্রামিং ভাষা:** TypeScript
-- **স্টাইলিং:** Tailwind CSS & DaisyUI
-- **অথেন্টিকেশন:** [Better Auth](https://better-auth.com/) (Email/Password, OAuth)
-- **ডাটাবেস:** MongoDB (Atlas)
-- **নোটিফিকেশন:** React Toastify
-- **আইকন ও ফন্ট:** React Icons, Google Fonts (Anek Bangla)
+1. **🔴 Real-Time Price Ticker / Marquee**
+   - An animated, infinitely scrolling marquee that displays daily price fluctuations of top commodities, making price increases (▲) and decreases (▼) easy to track.
+
+2. **📅 Automatic Bengali Calendar and Date**
+   - Displays the current Bengali date, including the Bengali day, month, and year, with a modern, real-time interface.
+
+3. **📊 Detailed Product Analysis (Product Details Page)**
+   - Provides price comparisons with the previous day, minimum, maximum, and average prices, along with comparative price lists from major local markets.
+
+4. **🔒 Secure Routes and Advanced Authentication**
+   - A secure authentication system powered by Better Auth, supporting email/password and social login through Google and GitHub. Access to detailed product pages is controlled through protected routes.
+
+5. **👤 User Profile and Account Management**
+   - Allows users to view their account information, update their profile name, and sign out instantly.
+
+6. **🏷️ Category Filtering and Dynamic Sorting**
+   - Supports filtering by categories such as vegetables, fish and meat, rice and lentils, as well as sorting products by price in ascending or descending order.
+
+7. **📱 Responsive and Accessible Design**
+   - Features a user-friendly, responsive grid layout optimized for mobile phones, tablets, and desktop devices.
 
 ---
 
-## 🚀 লোকাল সেটআপ গাইড (Getting Started)
+## 🛠️ Technologies Used
 
-### ১. ক্লোন ও ডিপেন্ডেন্সি ইনস্টল
+- **Frontend Framework:** [Next.js](https://nextjs.org/) (App Router, React 19)
+- **Programming Language:** TypeScript
+- **Styling:** Tailwind CSS and DaisyUI
+- **Authentication:** [Better Auth](https://better-auth.com/) (Email/Password and OAuth)
+- **Database:** MongoDB Atlas
+- **Notifications:** React Toastify
+- **Icons and Fonts:** React Icons and Google Fonts (Anek Bangla)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository and Install Dependencies
 
 ```bash
 git clone https://github.com/Md-sihab11/bazar-dor.git
@@ -45,9 +51,9 @@ cd bazar-dor
 npm install
 ```
 
-### ২. এনভায়রনমেন্ট ভেরিয়েবল সেটআপ (`.env`)
+### 2. Configure Environment Variables (`.env`)
 
-প্রজেক্ট রুট ফোল্ডারে একটি `.env` ফাইল তৈরি করুন এবং নিচের মানগুলো যোগ করুন:
+Create a `.env` file in the project root directory and add the following variables:
 
 ```env
 MONGO_DB_URL=your_mongodb_connection_string
@@ -59,30 +65,36 @@ GITHUB_CLIENT_ID=your_github_client_id
 GITHUB_CLIENT_SECRET=your_github_client_secret
 ```
 
-### ৩. ডেভেলপমেন্ট সার্ভার চালু করুন
+Replace the placeholder values with your actual MongoDB connection string, authentication secret, and OAuth credentials.
+
+### 3. Start the Development Server
 
 ```bash
 npm run dev
 ```
 
-ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করুন।
+Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## 📂 ফোল্ডার স্ট্রাকচার
+## 📂 Folder Structure
 
-```
+```text
 src/
 ├── app/
-│   ├── (auth)/         # লগইন ও সাইনআপ পেজ
-│   ├── api/            # Better Auth API হ্যান্ডলার
-│   ├── categories/     # ক্যাটাগরি পেজ ও লোডিং স্কেলিটন
-│   ├── detailpage/     # সুরক্ষিত প্রোডাক্ট ডিটেইল পেজ
-│   ├── profile/        # ইউজার প্রোফাইল পেজ
-│   ├── loading.tsx     # গ্লোবাল লোডিং স্পিনার
-│   ├── not-found.tsx   # কাস্টম ৪০৪ পেজ
-│   └── page.tsx        # হোম পেজ (হিরো + প্রোডাক্ট সেকশন)
-├── components/         # রিইউজেবল ইউআই কম্পোনেন্টস (Header, Footer, Marquee, ইত্যাদি)
-├── lib/                # Auth ও ডাটাবেস কনফিগারেশন
-└── types/              # টাইপস্ক্রিপ্ট টাইপ ডেফিনিশন
+│   ├── (auth)/         # Login and signup pages
+│   ├── api/            # Better Auth API handlers
+│   ├── categories/     # Category pages and loading skeletons
+│   ├── detailpage/     # Protected product detail pages
+│   ├── profile/        # User profile page
+│   ├── loading.tsx     # Global loading spinner
+│   ├── not-found.tsx   # Custom 404 page
+│   └── page.tsx        # Home page (hero section + products)
+├── components/         # Reusable UI components (Header, Footer, Marquee, etc.)
+├── lib/                # Authentication and database configuration
+└── types/              # TypeScript type definitions
 ```
+
+---
+
+**Bazar Dor** aims to make essential commodity prices more transparent and accessible, helping people in Bangladesh monitor daily market trends and make informed purchasing decisions.

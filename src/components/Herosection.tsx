@@ -1,15 +1,7 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import BanglaDate from "@/components/date/bangla-date";
 
 const Herosection = () => {
-    const [date, setDate] = useState("");
-
-    useEffect(() => {
-        setDate(new Date().toLocaleDateString("bn-BD", { dateStyle: "full" }));
-    }, []);
-
     return (
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-5">
             <div className="relative overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm">
@@ -23,9 +15,7 @@ const Herosection = () => {
                     {/* Left Content */}
                     <div className="w-full md:w-3/5 text-center md:text-left">
 
-                        <p className="inline-block mb-3 px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium">
-                            {date}
-                        </p>
+                        <BanglaDate className="inline-block mb-3 px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium" />
 
                         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
                             আজকের বাজারের দাম{" "}
@@ -43,6 +33,7 @@ const Herosection = () => {
 
                         <a
                             href="#সব-পণ্য"
+
                             className=" cursor-pointer mt-6 inline-flex items-center gap-2 rounded-lg bg-green-700 px-5 py-3 text-sm sm:text-base font-semibold text-white shadow-md shadow-green-700/20 transition-all duration-300 hover:bg-green-800 hover:-translate-y-0.5 hover:shadow-lg"
                         >
                             সব পণ্য দেখুন

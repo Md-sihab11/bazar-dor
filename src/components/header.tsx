@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import BanglaDate from "./bangladate";
+import BanglaDate from "@/components/date/bangla-date";
 import { useSession, signOut } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";

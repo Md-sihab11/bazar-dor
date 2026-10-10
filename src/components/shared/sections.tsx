@@ -7,19 +7,9 @@ const toBnNum = (num: number | string) => {
     return new Intl.NumberFormat("bn-BD").format(Number(num));
 };
 
-
 const SectionsPage = async () => {
-    let data: ProductMarquee[] = [];
-
-    try {
-        const res = await fetch('https://api.api-store.workers.dev/api/bazardor/products')
-        if (res.ok) {
-            data = await res.json();
-        }
-    } catch {
-        // API down বা rate-limit — empty array নিয়ে চলি
-    }
-
+    const res = await fetch('https://api.abcz.workers.dev/api/bazardor/products')
+    const data: ProductMarquee[] = await res.json()
     const totalData = data.length
     const increasedProducts = data.filter((pr) => pr.change.dir === "up");
     const sortingProducts = increasedProducts.sort((a, b) => b.change.pct - a.change.pct)
@@ -203,13 +193,9 @@ const SectionsPage = async () => {
 
             </div>
 
-            <h2 id="সব-পণ্য" className="font-bold text-[22px] mt-5 scroll-mt-20">
-                <span id="allProducts" className="hidden" />
-                সব পণ্য
-            </h2>
-
+            <h2 id="সব-পণ্য" className="font-bold text-[22px] mt-5">সব পণ্য</h2>
             <div >
-                <p>মোট {totalData} টি পণ্য দেখানো হচ্ছে</p>
+                <p>মোট {toBnNum(totalData)} টি পণ্য দেখানো হচ্ছে</p>
 
                 <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
@@ -318,4 +304,3 @@ const SectionsPage = async () => {
 };
 
 export default SectionsPage;
-

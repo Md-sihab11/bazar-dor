@@ -1,12 +1,13 @@
-
 import { ProductMarquee } from '@/types/navtypes';
-import React from 'react';
 
 const toBnNum = (num: number | string) => {
     return new Intl.NumberFormat("bn-BD").format(Number(num));
 };
 
 const PriceSummery = ({ data }: { data: ProductMarquee }) => {
+    if (!data?.markets || data.markets.length === 0) {
+        return null;
+    }
 
     const lowestPrice = Math.min(...data.markets.map((market) => market.min));
     const highestPrice = Math.max(...data.markets.map((market) => market.max));

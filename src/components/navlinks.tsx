@@ -1,36 +1,16 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import type { Category } from '@/types/navtypes';
 import NavlinksClient from './NavlinksClient';
 
+
 const Navlinks = async () => {
-    try {
-        const res = await fetch(
-            'https://api.api-store.workers.dev/api/bazardor/categories',
+    const res = await fetch(
+        'https://api.abcz.workers.dev/api/bazardor/categories'
+    ); //2 api
 
-            { next: { revalidate: 300 } }
-        );
+    const data: Category[] = await res.json();
 
-        if (!res.ok) {
-            return (
-                <Suspense fallback={<div className="w-full border-b border-gray-200 bg-white h-14" />}>
-                    <NavlinksClient data={[]} />
-                </Suspense>
-            );
-        }
-
-        const data: Category[] = await res.json();
-        return (
-            <Suspense fallback={<div className="w-full border-b border-gray-200 bg-white h-14" />}>
-                <NavlinksClient data={data} />
-            </Suspense>
-        );
-    } catch {
-        return (
-            <Suspense fallback={<div className="w-full border-b border-gray-200 bg-white h-14" />}>
-                <NavlinksClient data={[]} />
-            </Suspense>
-        );
-    }
+    return <NavlinksClient data={data} />;
 };
 
 export default Navlinks;

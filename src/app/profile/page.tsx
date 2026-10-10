@@ -10,14 +10,12 @@ import Link from "next/link";
 const ProfilePage = () => {
     const { data: session, isPending } = useSession();
     const router = useRouter();
-    const [name, setName] = useState("");
+    const [name, setName] = useState<string | null>(null);
+    const currentName = name ?? session?.user?.name ?? "";
 
     useEffect(() => {
         if (!isPending && !session) {
             router.push("/log-in");
-        }
-        if (session?.user?.name) {
-            setName(session.user.name);
         }
     }, [session, isPending, router]);
 
@@ -31,13 +29,14 @@ const ProfilePage = () => {
 
     const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!name.trim()) {
+        const trimmedName = currentName.trim();
+        if (!trimmedName) {
             toast.error("নাম খালি রাখা যাবে না!");
             return;
         }
         setIsUpdating(true);
         try {
-            const res = await updateUser({ name: name.trim() });
+            const res = await updateUser({ name: trimmedName });
             if (res?.error) {
                 toast.error(res.error.message || "নাম আপডেট করতে সমস্যা হয়েছে!");
             } else {
@@ -123,7 +122,7 @@ const ProfilePage = () => {
                             <label className="block text-sm font-medium text-gray-700 mb-1">নাম</label>
                             <input
                                 type="text"
-                                value={name}
+                                value={currentName}
                                 onChange={(e) => setName(e.target.value)}
                                 className="input w-full border border-gray-200 rounded-lg"
                                 placeholder="আপনার নাম"

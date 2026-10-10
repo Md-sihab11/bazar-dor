@@ -3,6 +3,7 @@ import { Anek_Bangla } from "next/font/google";
 import "./globals.css";
 import HeaderPage from "@/components/header";
 import Navlinks from "@/components/navlinks";
+import Pagemarquee from "@/components/marquee";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Suspense } from "react";
 
 const banglaFonts = Anek_Bangla({
-  subsets: ["latin", "bengali"],
+  subsets: ["bengali"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
@@ -32,12 +33,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Suspense fallback={<div className="h-14 bg-white border-b border-gray-200" />}>
           <Navlinks />
         </Suspense>
-        
+        <Suspense fallback={<div className="h-10 bg-white" />}>
+          <Pagemarquee />
+        </Suspense>
         <main className="flex-1">
           {children}
         </main>
         <Footer />
-        <ToastContainer position="top-right" autoClose={3000} />
+        <ToastContainer position="top-center" autoClose={2000} />
       </body>
     </html>
   );
